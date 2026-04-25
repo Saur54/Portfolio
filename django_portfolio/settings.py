@@ -22,9 +22,7 @@ if not SECRET_KEY:
         # Production mode - SECRET_KEY is required
         raise ValueError('DJANGO_SECRET_KEY environment variable must be set in production')
 
-# Support both DJANGO_ALLOWED_HOSTS and ALLOWED_HOSTS variable names
-allowed_hosts_str = os.getenv('DJANGO_ALLOWED_HOSTS') or os.getenv('ALLOWED_HOSTS') or '127.0.0.1,localhost'
-ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_str.split(',') if host.strip()]
+ALLOWED_HOSTS = ['portfolio-c2tk.onrender.com', '127.0.0.1', 'localhost']
 
 
 def build_database_config() -> dict:

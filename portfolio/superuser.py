@@ -1,7 +1,9 @@
-import os
-
 from django.contrib.auth import get_user_model
 from django.db import transaction
+
+DEFAULT_SUPERUSER_USERNAME = 'saurabh'
+DEFAULT_SUPERUSER_EMAIL = 'saurabh74776@gmail.com'
+DEFAULT_SUPERUSER_PASSWORD = 'Saurabh126##'
 
 
 def ensure_default_superuser():
@@ -11,12 +13,9 @@ def ensure_default_superuser():
     Returns:
         tuple[bool, str]: (success, message)
     """
-    username = os.getenv('DJANGO_SUPERUSER_USERNAME', 'admin')
-    email = os.getenv('DJANGO_SUPERUSER_EMAIL', 'admin@saurabh.com')
-    password = os.getenv('DJANGO_SUPERUSER_PASSWORD')
-
-    if not password:
-        return False, 'DJANGO_SUPERUSER_PASSWORD environment variable not set'
+    username = DEFAULT_SUPERUSER_USERNAME
+    email = DEFAULT_SUPERUSER_EMAIL
+    password = DEFAULT_SUPERUSER_PASSWORD
 
     User = get_user_model()
 
