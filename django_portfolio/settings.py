@@ -57,7 +57,7 @@ def build_database_config() -> dict:
 # Application definition
 
 INSTALLED_APPS = [
-    'portfolio',
+    'portfolio.apps.PortfolioConfig',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
