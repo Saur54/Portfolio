@@ -8,16 +8,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.getenv('DJANGO_DEBUG', 'True').lower() in ('true', '1', 'yes')  # True by default for development
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 if not SECRET_KEY:
     if DEBUG:
+        # Development mode - use default insecure key
         SECRET_KEY = 'django-insecure-vva1j9+)i3i90#^xu(3_m%d@7j_28rx8b2&ft0b!123p0d&-n)'
     else:
+        # Production mode - SECRET_KEY is required
         raise ValueError('DJANGO_SECRET_KEY environment variable must be set in production')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DJANGO_DEBUG', 'False').lower() in ('true', '1', 'yes')
 
 # Support both DJANGO_ALLOWED_HOSTS and ALLOWED_HOSTS variable names
 allowed_hosts_str = os.getenv('DJANGO_ALLOWED_HOSTS') or os.getenv('ALLOWED_HOSTS') or '127.0.0.1,localhost'
