@@ -132,6 +132,40 @@ nav.scrolled{background:rgba(4,8,15,.92);backdrop-filter:blur(24px);border-botto
 .download-cv-btn:hover { background: rgba(139, 128, 249, 0.1); transform: translateY(-3px); }
 .cv-icon { width: 50px; height: 50px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; }
 
+/* â”€â”€ ABOUT POLISH â”€â”€ */
+.about-info-content,
+.about-img-side {
+  min-width: 0;
+}
+
+.about-grid {
+  align-items: stretch;
+}
+
+.about-info-content h3 {
+  letter-spacing: 0.04em;
+}
+
+.about-desc {
+  max-width: 760px;
+}
+
+.about-stat-chips {
+  width: 100%;
+}
+
+.about-stat-chips .chip {
+  height: 100%;
+}
+
+.personal-info-grid {
+  grid-auto-rows: minmax(0, auto);
+}
+
+.info-item {
+  word-break: break-word;
+}
+
 /* ── SERVICES ── */
 .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 60px; }
 .service-card-creative { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 32px; padding: 50px 40px; position: relative; transition: 0.5s; overflow: hidden; height: 100%; }
@@ -284,6 +318,32 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding: 40
   .edu-card-creative { padding: 35px 25px; }
   .contact-grid { grid-template-columns: 1fr; gap: 50px; }
   .form-container { padding: 40px; }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero-btns {
+    align-items: flex-start;
+    margin-left: 4px;
+  }
+
+  .hero-stats {
+    justify-content: flex-start;
+  }
+
+  .about-grid {
+    gap: 42px;
+  }
+
+  .info-card-wrap {
+    padding: 32px;
+  }
+
+  .about-stat-chips {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    max-width: none;
+    margin: 0;
+  }
 }
 
 @media (max-width: 1024px) {
