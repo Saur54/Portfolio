@@ -1,0 +1,59 @@
+/* ── JAZZMIN GLASSMORPHISM BACKGROUND ── */
+
+body, .wrapper, .content-wrapper, .main-sidebar {
+    background: transparent !important;
+}
+
+body {
+    background: linear-gradient(rgba(11, 10, 26, 0.6), rgba(11, 10, 26, 0.6)), 
+                url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1920&q=80') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-attachment: fixed !important;
+}
+
+/* Sidebar Glassmorphism */
+.main-sidebar, .brand-link {
+    background: rgba(20, 18, 45, 0.5) !important;
+    backdrop-filter: blur(15px) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Content Area Glassmorphism */
+.content-wrapper {
+    background: transparent !important;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.04) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 15px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+.card-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    background: transparent !important;
+}
+
+/* Navbar Glassmorphism */
+.main-header {
+    background: rgba(11, 10, 26, 0.7) !important;
+    backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Table Backgrounds */
+.table {
+    background: transparent !important;
+    color: #e0e0e0 !important;
+}
+
+.table thead th {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.table td, .table th {
+    border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+}

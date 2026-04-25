@@ -1,0 +1,60 @@
+<!-- NAV -->
+<nav id="navbar">
+  <div class="container nav-container">
+    <a class="logo" href="/#home">
+      <div class="logo-icon"><span>{</span>S<span>}</span></div>
+      <div class="logo-name">Saurabh</div>
+      <div class="logo-sub">{% if home %}{{ home.profession }}{% else %}Software Developer{% endif %}</div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#home">Home</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#education">Education</a></li>
+      <li><a href="/#experience">Experience</a></li>
+      <li><a href="/#skills">Skills</a></li>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#projects">Projects</a></li>
+      <li><a href="{% url 'blog_list' %}">Blog</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <a href="tel:+917318127213" class="nav-btn" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">Request A Call</a>
+    <div class="hamburger" id="ham" onclick="toggleSidebar()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE SIDEBAR OVERLAY -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+<!-- MOBILE SIDEBAR -->
+<aside class="mobile-sidebar" id="mobileSidebar">
+  <div class="sidebar-header">
+    <a class="logo" href="/#home" onclick="closeSidebar()">
+      <div class="logo-icon"><span>{</span>S<span>}</span></div>
+      <div>
+        <div class="logo-name">Saurabh</div>
+        <div class="logo-sub">{% if home %}{{ home.profession }}{% else %}Software Developer{% endif %}</div>
+      </div>
+    </a>
+    <button class="sidebar-close" onclick="toggleSidebar()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <ul class="sidebar-links">
+    <li><a href="/#home" onclick="closeSidebar()"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="/#about" onclick="closeSidebar()"><i class="fas fa-user"></i> About</a></li>
+    <li><a href="/#education" onclick="closeSidebar()"><i class="fas fa-graduation-cap"></i> Education</a></li>
+    <li><a href="/#experience" onclick="closeSidebar()"><i class="fas fa-briefcase"></i> Experience</a></li>
+    <li><a href="/#skills" onclick="closeSidebar()"><i class="fas fa-code"></i> Skills</a></li>
+    <li><a href="/#services" onclick="closeSidebar()"><i class="fas fa-cogs"></i> Services</a></li>
+    <li><a href="/#projects" onclick="closeSidebar()"><i class="fas fa-folder-open"></i> Projects</a></li>
+    <li><a href="{% url 'blog_list' %}" onclick="closeSidebar()"><i class="fas fa-pen-nib"></i> Blog</a></li>
+    <li><a href="/#contact" onclick="closeSidebar()"><i class="fas fa-envelope"></i> Contact</a></li>
+  </ul>
+  <div class="sidebar-cta">
+    <a href="tel:+917318127213" class="sidebar-call-btn">
+      <i class="fas fa-phone-alt"></i> Request A Call
+    </a>
+  </div>
+</aside>

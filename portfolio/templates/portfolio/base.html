@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Saurabh | Software Developer{% endblock %}</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+    <!-- MESSAGES -->
+    {% if messages %}
+    <div id="msgBox" style="position: fixed; top: 30px; right: 30px; z-index: 10000; display: flex; flex-direction: column; gap: 10px;">
+        {% for message in messages %}
+        <div style="background: var(--accent); color: #000; padding: 18px 30px; border-radius: 12px; font-weight: 700; font-size: 14px; box-shadow: 0 15px 40px rgba(0,212,255,0.3); animation: slideIn 0.5s ease both;">
+            <i class="fas fa-check-circle me-2"></i> {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    <script>setTimeout(() => { const mb=document.getElementById('msgBox'); if(mb){mb.style.opacity = '0'; setTimeout(() => { mb.remove(); }, 500);} }, 4000);</script>
+    <style>@keyframes slideIn { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }</style>
+    {% endif %}
+
+    <!-- LOADER -->
+    <div class="loader" id="loader">
+        <div class="loader-name">Saur<span>abh</span></div>
+        <div class="loader-bar-wrap"><div class="loader-bar-fill"></div></div>
+        <div class="loader-txt">Loading Portfolio...</div>
+    </div>
+
+    <!-- CURSOR -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-trail" id="cursorTrail"></div>
+
+    <!-- PARTICLES -->
+    <canvas class="particles-canvas" id="particles"></canvas>
+
+    {% include 'portfolio/navbar.html' %}
+
+    {% block content %}{% endblock %}
+
+    {% include 'portfolio/footer.html' %}
+
+    <!-- Scripts -->
+    <script src="{% static 'js/typed.min.js' %}"></script>
+    <script src="{% static 'js/gsap.min.js' %}"></script>
+
+    <script>
+        /* ── SHARED SCRIPTS (CURSOR, LOADER, PARTICLES, NAV) ── */
+        window.addEventListener('load',()=>{
+            setTimeout(()=>{document.getElementById('loader').classList.add('done')},1800)
+        });
+
+        const cur=document.getElementById('cursor'),trail=document.getElementById('cursorTrail');
+        let mx=0,my=0,tx=0,ty=0;
+        document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+        (function anim(){tx+=(mx-tx)*.13;ty+=(my-ty)*.13;trail.style.left=tx+'px';trail.style.top=ty+'px';requestAnimationFrame(anim)})();
+
+        document.querySelectorAll('a,button,.filter-btn').forEach(el=>{
+            el.addEventListener('mouseenter',()=>{trail.style.transform='translate(-50%,-50%) scale(1.8)';cur.style.transform='translate(-50%,-50%) scale(0.3)'})
+            el.addEventListener('mouseleave',()=>{trail.style.transform='translate(-50%,-50%) scale(1)';cur.style.transform='translate(-50%,-50%) scale(1)'})
+        });
+
+        const nav=document.getElementById('navbar'),stBtn=document.getElementById('scrollTop');
+        window.addEventListener('scroll',()=>{
+            nav.classList.toggle('scrolled',scrollY>60);
+            if(stBtn) stBtn.classList.toggle('show',scrollY>400);
+        });
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('mobileSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            const ham = document.getElementById('ham');
+            const isOpen = sidebar.classList.contains('active');
+            if (isOpen) {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                ham.classList.remove('active');
+                document.body.style.overflow = '';
+            } else {
+                sidebar.classList.add('active');
+                overlay.classList.add('active');
+                ham.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        function closeSidebar() {
+            document.getElementById('mobileSidebar').classList.remove('active');
+            document.getElementById('sidebarOverlay').classList.remove('active');
+            document.getElementById('ham').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+
+        const canvas=document.getElementById('particles');
+        const ctx=canvas.getContext('2d');
+        let W,H,pts=[];
+        function resizePts(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
+        resizePts(); window.addEventListener('resize',resizePts);
+        for(let i=0;i<90;i++)pts.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+.3,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,a:Math.random()});
+        (function drawPts(){
+            ctx.clearRect(0,0,W,H);
+            pts.forEach(p=>{
+                p.x+=p.vx;p.y+=p.vy;p.a+=.005;
+                if(p.x<0||p.x>W)p.vx*=-1; if(p.y<0||p.y>H)p.vy*=-1;
+                ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+                ctx.fillStyle=`rgba(0,212,255,${(.3+.3*Math.sin(p.a)).toFixed(2)})`; ctx.fill();
+            });
+            pts.forEach((a,i)=>pts.slice(i+1).forEach(b=>{
+                const d=Math.hypot(a.x-b.x,a.y-b.y);
+                if(d<120){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+                    ctx.strokeStyle=`rgba(0,212,255,${(0.06*(1-d/120)).toFixed(3)})`;
+                    ctx.lineWidth=.5;ctx.stroke();}
+            }));
+            requestAnimationFrame(drawPts);
+        })();
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

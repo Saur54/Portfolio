@@ -1,0 +1,391 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- HERO -->
+<section id="home">
+    <div class="container hero-container">
+        <div class="hero-content">
+            <p class="hero-greeting">Hello, I am</p>
+            <h1 class="hero-name">{% if home %}{{ home.first_name }}{% else %}Saurabh{% endif %}</h1>
+            <h1 class="hero-name stroke" style="margin-bottom: 30px;">{% if home %}{{ home.last_name }}{% else %}nxvxvmx{% endif %}</h1>
+            <div class="hero-role">I'm a&nbsp;<span id="typed"></span></div>
+            <p class="hero-desc">{% if home %}{{ home.description }}{% else %}I build beautiful, responsive and
+                high-performance web applications.{% endif %}</p>
+            <div class="hero-btns">
+                <a href="tel:+917318127213" class="btn-glow">Request A Call</a>
+                <a href="{% if about %}{{ about.cv_file.url }}{% endif %}" class="btn-ghost">Download CV</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item"><span class="stat-num" data-count="1">0</span><span class="stat-label">YEARS
+                        EXP.</span></div>
+                <div class="stat-item"><span class="stat-num" data-count="10">0</span><span class="stat-label">PROJECTS
+                        DONE</span></div>
+                <div class="stat-item"><span class="stat-num" data-count="10">0</span><span class="stat-label">HAPPY
+                        CLIENTS</span></div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-img-circle-bg"></div>
+            <div class="avatar-circle">
+                {% if home and home.hero_image %}
+                <img src="{{ home.hero_image.url }}" alt="Saurabh">
+                {% else %}
+                <img src="https://via.placeholder.com/400" alt="Saurabh">
+                {% endif %}
+            </div>
+            <div class="floating-badge fb-top">⚡ Django Expert</div>
+            <div class="floating-badge fb-bottom-right">🌐 Python Developer</div>
+            <div class="floating-badge fb-bottom-center">
+                <div class="fb-name">Saurabh</div>
+                <div class="fb-sub">{% if home %}{{ home.profession }}{% else %}Full Stack Developer{% endif %}</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<!-- ABOUT -->
+<section id="about" class="section">
+    <div class="container">
+        <div class="section-label reveal">Get To Know</div>
+        <div class="section-title reveal">About Me</div>
+
+        <div class="about-grid">
+            <div class="about-info-content reveal">
+                <h3>Personal Infos</h3>
+
+                <div class="info-card-wrap">
+                    <div class="personal-info-grid">
+                        <div class="info-item"><span class="info-label">First Name :</span><span class="info-value">{% if about %}{{ about.first_name }}{% else %}Steve{% endif %}</span></div>
+                        <div class="info-item"><span class="info-label">Last Name :</span><span class="info-value">{% if about %}{{ about.last_name }}{% else %}Milner{% endif %}</span></div>
+                        <div class="info-item"><span class="info-label">Age :</span><span class="info-value">{% if about %}{{ about.age }}{% else %}27{% endif %} Years</span></div>
+                        <div class="info-item"><span class="info-label">Nationality :</span><span class="info-value">{% if about %}{{ about.nationality }}{% else %}Tunisian{% endif %}</span></div>
+                        <div class="info-item"><span class="info-label">Freelance :</span><span class="info-value">{% if about %}{{ about.freelance }}{% else %}Available{% endif %}</span></div>
+                        <div class="info-item"><span class="info-label">Address :</span><span class="info-value">{% if about %}{{ about.address }}{% else %}Tunis{% endif %}</span></div>
+                        <div class="info-item"><span class="info-label">Phone :</span><span class="info-value">{% if about %}{{ about.phone }}{% else %}+21621184010{% endif %}</span></div>
+                        <div class="info-item"><span class="info-label">Email :</span><span class="info-value">{% if about %}{{ about.email }}{% else %}you@mail.com{% endif %}</span></div>
+                        <div class="info-item">
+                            <span class="info-label">Socials :</span>
+                            <span class="info-value" style="display: flex; gap: 10px; align-items: center; margin-top: 5px;">
+                                {% for link in social_links %}
+                                <a href="{{ link.url }}" target="_blank" style="width: 32px; height: 32px; background: rgba(139, 128, 249, 0.1); border: 1px solid rgba(139, 128, 249, 0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 14px; transition: 0.3s; text-decoration: none;" onmouseover="this.style.background='var(--accent)'; this.style.color='#000'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(139, 128, 249, 0.1)'; this.style.color='var(--accent)'; this.style.transform='translateY(0)'">
+                                    <i class="{{ link.icon }}"></i>
+                                </a>
+                                {% endfor %}
+                            </span>
+                        </div>
+                        <div class="info-item"><span class="info-label">Languages :</span><span class="info-value">{% if about %}{{ about.languages }}{% else %}French, English{% endif %}</span></div>
+                    </div>
+                </div>
+
+                <div class="about-desc">
+                    {% if about %}{{ about.description }}{% else %}I am a passionate Software Developer with expertise
+                    in building modern web applications. I love turning complex problems into simple, beautiful
+                    solutions.{% endif %}
+                </div>
+
+                {% if about and about.cv_file %}
+                <a href="{{ about.cv_file.url }}" target="_blank" class="download-cv-btn">Download CV <div
+                        class="cv-icon"><i class="fas fa-download"></i></div></a>
+                {% else %}
+                <a href="#" class="download-cv-btn">Download CV <div class="cv-icon"><i class="fas fa-download"></i>
+                    </div></a>
+                {% endif %}
+            </div>
+
+            <div class="about-img-side reveal" style="transition-delay:.15s">
+                <div class="about-stat-chips"
+                    style="position:static; transform:none; display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                    <div class="chip"><span class="chip-num">1+</span>
+                        <div class="chip-label-wrap">
+                            <div class="chip-line"></div>
+                            <div class="chip-label">Years of<br>Experience</div>
+                        </div>
+                    </div>
+                    <div class="chip"><span class="chip-num">10+</span>
+                        <div class="chip-label-wrap">
+                            <div class="chip-line"></div>
+                            <div class="chip-label">Completed<br>Projects</div>
+                        </div>
+                    </div>
+                    <div class="chip"><span class="chip-num">10+</span>
+                        <div class="chip-label-wrap">
+                            <div class="chip-line"></div>
+                            <div class="chip-label">Happy<br>Customers</div>
+                        </div>
+                    </div>
+                    <div class="chip"><span class="chip-num">5+</span>
+                        <div class="chip-label-wrap">
+                            <div class="chip-line"></div>
+                            <div class="chip-label">Awards<br>Won</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EDUCATION -->
+<!-- EDUCATION -->
+<section id="education" class="section">
+    <div class="container">
+        <div class="section-label reveal">My Learning</div>
+        <div class="section-title reveal">Education Background</div>
+        <div class="edu-timeline">
+            {% for edu in education %}
+            <div class="edu-card-creative reveal">
+                <div class="tech-bg-layer">
+                    <i class="fas fa-code tech-icon-float" style="top: 10%; left: 10%; animation-delay: 0s;"></i>
+                    <i class="fas fa-terminal tech-icon-float" style="top: 60%; left: 70%; animation-delay: -3s;"></i>
+                    <i class="fas fa-database tech-icon-float" style="top: 80%; left: 20%; animation-delay: -7s;"></i>
+                </div>
+                <div class="edu-content-inner">
+                    <div class="edu-year-badge">{{ edu.year_range }}</div>
+                    <h4>{{ edu.degree_title }}</h4>
+                    <span class="school">{% if edu.institution %}{{ edu.institution }}{% else %}Academic Institution{% endif %}</span>
+                    {% if edu.location %}
+                    <div
+                        style="font-size: 13px; color: var(--accent2); margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-location-dot" style="font-size: 11px;"></i> {{ edu.location }}
+                    </div>
+                    {% endif %}
+                    <p>{{ edu.description }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- EXPERIENCE -->
+<!-- EXPERIENCE -->
+<section id="experience" class="section">
+    <div class="container">
+        <div class="section-label reveal">My Journey</div>
+        <div class="section-title reveal">Work Experience</div>
+        <div class="timeline">
+            {% for exp in experience %}
+            <div class="tl-item reveal">
+                <div class="tl-dot">💼</div>
+                <div class="tl-content">
+                    <div class="tl-top">
+                        <div class="tl-role">{{ exp.job_title }}</div>
+                        <div class="tl-period">{{ exp.year_range }}</div>
+                    </div>
+                    <div class="tl-company">{% if exp.company %}{{ exp.company }}{% else %}Organization{% endif %}</div>
+                    {% if exp.location %}
+                    <div
+                        style="font-size: 13px; color: var(--accent); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-map-marker-alt" style="font-size: 11px;"></i> {{ exp.location }}
+                    </div>
+                    {% endif %}
+                    <div class="tl-desc">{{ exp.description }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<!-- SKILLS -->
+<section id="skills" class="section">
+    <div class="container">
+        <div class="section-label reveal">My Abilities</div>
+        <div class="section-title reveal">Technical Skills</div>
+        <div class="skills-grid">
+            {% for skill in skills %}
+            <div class="skill-circle-card reveal">
+                <div class="circle-box">
+                    <svg viewBox="0 0 140 140">
+                        <circle class="circle-bg" cx="70" cy="70" r="65"></circle>
+                        <circle class="circle-progress" cx="70" cy="70" r="65"
+                            style="--skill-color: {% cycle '#8b80f9' '#f07178' '#95e6cb' '#ffb400' %}; --percent: {{ skill.percentage }};">
+                        </circle>
+                    </svg>
+                    <div class="circle-inner">
+                        <span class="skill-icon-inner"><i class="fas fa-code"></i></span>
+                        <div class="skill-pct-text">{{ skill.percentage }}%</div>
+                    </div>
+                </div>
+                <div class="skill-name-bottom">{{ skill.name }}</div>
+                <div class="skill-badge">Technical</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<!-- SERVICES -->
+<section id="services" class="section">
+    <div class="container">
+        <div class="section-label reveal">What I Do</div>
+        <div class="section-title reveal">My Services</div>
+        <div class="services-grid">
+            {% for service in services %}
+            <div class="service-card-creative reveal">
+                <div class="service-num">0{{ forloop.counter }}</div>
+                <div class="service-icon-box"><i class="{{ service.icon }}"></i></div>
+                <div class="service-content">
+                    <h4>{{ service.title }}</h4>
+                    <p>{{ service.description }}</p>
+                    <a href="#contact" class="service-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<!-- PROJECTS -->
+<section id="projects" class="section">
+    <div class="container">
+        <div class="section-label reveal">My Work</div>
+        <div class="section-title reveal">Recent Projects</div>
+        <div class="filter-row reveal">
+            <button class="filter-btn active" onclick="filterProjects('all', this)">All Projects</button>
+            <button class="filter-btn" onclick="filterProjects('Web', this)">Web Apps</button>
+            <button class="filter-btn" onclick="filterProjects('Mobile', this)">Mobile</button>
+            <button class="filter-btn" onclick="filterProjects('Design', this)">UI/UX Design</button>
+        </div>
+        <div class="projects-grid mt-5" id="projGrid">
+            {% for project in projects %}
+            <div class="project-card reveal" data-category="{{ project.category }}">
+                <div class="proj-img"><img src="{{ project.image.url }}" alt="{{ project.title }}"></div>
+                <div class="proj-body">
+                    <div class="proj-top">
+                        <div class="proj-cat">{{ project.category }}</div>
+                        {% if project.is_featured %}<div class="featured-badge"><i class="fas fa-star"></i> Featured
+                        </div>{% endif %}
+                    </div>
+                    <h3 class="proj-title">{{ project.title }}</h3>
+                    <p class="proj-desc">{{ project.description }}</p>
+                    <div class="proj-stack">{% for tech in project.get_tech_stack %}<span class="tech-chip">{{ tech }}</span>{% endfor %}</div>
+                    <div class="proj-links">
+                        {% if project.live_link %}<a href="{{ project.live_link }}" target="_blank" class="pl-link"><i
+                                class="fas fa-external-link-alt"></i> Live Demo</a>{% endif %}
+                        {% if project.code_link %}<a href="{{ project.code_link }}" target="_blank" class="pl-link"><i
+                                class="fab fa-github"></i> GitHub</a>{% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<!-- CONTACT -->
+<section id="contact" class="section">
+    <div class="container">
+        <div class="section-label reveal">Get In Touch</div>
+        <div class="section-title reveal">Contact Me</div>
+        <div class="contact-grid mt-5">
+            <div class="contact-info-side reveal">
+                <h3
+                    style="font-family:'Clash Display',sans-serif; font-size: 38px; font-weight: 700; line-height: 1.1; margin-bottom: 20px;">
+                    Let's <span style="color:var(--accent)">Work Together</span></h3>
+                <p style="color: var(--muted); margin-bottom: 40px; font-size: 16px; line-height: 1.6;">I'm currently
+                    available for freelance work. Reach out anytime!</p>
+                <div class="contact-info-card">
+                    <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="contact-info-text">
+                        <h4>EMAIL</h4>
+                        <p>{% if about %}{{ about.email }}{% else %}rajneesh@kramate.com{% endif %}</p>
+                    </div>
+                </div>
+                <div class="contact-info-card">
+                    <div class="contact-info-icon"><i class="fas fa-phone-alt"></i></div>
+                    <div class="contact-info-text">
+                        <h4>PHONE</h4>
+                        <p>{% if about %}{{ about.phone }}{% else %}+91 8601426257{% endif %}</p>
+                    </div>
+                </div>
+                <div class="contact-info-card">
+                    <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="contact-info-text">
+                        <h4>LOCATION</h4>
+                        <p>{% if about %}{{ about.address }}{% else %}India{% endif %}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-container reveal">
+                <h4 class="form-title">Send Me a Message</h4>
+                <form action="{% url 'index' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-grid">
+                        <div class="form-group"><label>Your Name *</label><input type="text" name="name"
+                                class="form-control" placeholder="John Doe" required></div>
+                        <div class="form-group"><label>Email Address *</label><input type="email" name="email"
+                                class="form-control" placeholder="john@example.com" required></div>
+                        <div class="form-group"><label>Phone Number</label><input type="text" name="phone"
+                                class="form-control" placeholder="10 digit number"></div>
+                        <div class="form-group"><label>Subject *</label><input type="text" name="subject"
+                                class="form-control" placeholder="Project Discussion" required></div>
+                    </div>
+                    <div class="form-group"><label>Message *</label><textarea name="message" class="form-control"
+                            style="height: 120px;" placeholder="Tell me about your project..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i><span>Send
+                            Message</span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    /* ── PAGE SPECIFIC SCRIPTS ── */
+    const roles = ['{% if home %}{{ home.profession }}{% else %}Software Developer{% endif %}', 'Web Developer', 'Django Expert', 'Problem Solver'];
+    let ri = 0, ci = 0, del = false, typed = document.getElementById('typed');
+    function typeLoop() {
+        const role = roles[ri];
+        if (!del) { typed.textContent = role.slice(0, ci + 1); ci++; if (ci === role.length) { del = true; setTimeout(typeLoop, 1600); return; } }
+        else { typed.textContent = role.slice(0, ci - 1); ci--; if (ci === 0) { del = false; ri = (ri + 1) % roles.length; } }
+        setTimeout(typeLoop, del ? 60 : 100);
+    }
+    typeLoop();
+
+    function animateCounter(el) {
+        const target = +el.dataset.count, dur = 1500, step = dur / target; let current = 0;
+        const timer = setInterval(() => { current++; el.textContent = current + '+'; if (current >= target) clearInterval(timer) }, step);
+    }
+    const counters = document.querySelectorAll('.stat-num[data-count]');
+    let counted = false;
+    function checkCounters() { if (!counted && counters[0] && counters[0].getBoundingClientRect().top < window.innerHeight) { counted = true; counters.forEach(animateCounter) } }
+
+    const reveals = document.querySelectorAll('.reveal');
+    function checkReveal() {
+        reveals.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('visible') });
+        checkCounters();
+    }
+    window.addEventListener('scroll', checkReveal);
+    checkReveal();
+
+    function filterProjects(cat, btn) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active');
+        document.querySelectorAll('.project-card').forEach(c => {
+            const show = cat === 'all' || c.dataset.category === cat;
+            c.style.display = show ? 'flex' : 'none';
+        });
+    }
+
+    document.querySelectorAll('.edu-card-creative, .tl-content').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+            card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        });
+    });
+</script>
+{% endblock %}
