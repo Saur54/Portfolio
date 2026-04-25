@@ -97,4 +97,14 @@
   #home .floating-badge {
     display: none;
   }
+
+  #home .floating-badge.fb-bottom-center {
+    display: flex;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    padding: 8px 22px;
+    z-index: 4;
+  }
 }

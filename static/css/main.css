@@ -369,7 +369,7 @@ footer { background: var(--bg); border-top: 1px solid var(--border); padding: 40
   .hero-name.stroke { font-size: clamp(24px, 9vw, 42px); }
   .hero-role { font-size: 16px; }
   .hero-desc { font-size: 12px; }
-  .hero-btns { flex-direction: column; gap: 12px; align-items: center; }
+  .hero-btns { flex-direction: column; gap: 12px; align-items: flex-start; }
   .hero-stats { flex-wrap: wrap; justify-content: center; gap: 30px; }
   .hero-image { min-height: 300px; }
   .hero-img-circle-bg { width: 300px; height: 300px; }
