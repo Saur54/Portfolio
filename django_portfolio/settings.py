@@ -1,4 +1,5 @@
 import os
+from urllib.parse import unquote, urlparse
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,6 +25,33 @@ if not SECRET_KEY:
 # Support both DJANGO_ALLOWED_HOSTS and ALLOWED_HOSTS variable names
 allowed_hosts_str = os.getenv('DJANGO_ALLOWED_HOSTS') or os.getenv('ALLOWED_HOSTS') or '127.0.0.1,localhost'
 ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_str.split(',') if host.strip()]
+
+
+def build_database_config() -> dict:
+    database_url = os.getenv('DATABASE_URL')
+    if not database_url:
+        return {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+
+    parsed = urlparse(database_url)
+    scheme = parsed.scheme.lower()
+    if scheme == 'postgres':
+        scheme = 'postgresql'
+
+    if scheme not in ('postgresql', 'postgresql_psycopg2'):
+        raise ValueError(f'Unsupported DATABASE_URL scheme: {parsed.scheme}')
+
+    return {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': unquote(parsed.path.lstrip('/')),
+        'USER': unquote(parsed.username or ''),
+        'PASSWORD': unquote(parsed.password or ''),
+        'HOST': parsed.hostname or '',
+        'PORT': str(parsed.port or ''),
+        'CONN_MAX_AGE': int(os.getenv('DATABASE_CONN_MAX_AGE', '600')),
+    }
 
 
 # Application definition
@@ -74,10 +102,7 @@ WSGI_APPLICATION = 'django_portfolio.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': build_database_config(),
 }
 
 
