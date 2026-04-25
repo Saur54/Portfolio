@@ -213,7 +213,7 @@ JAZZMIN_SETTINGS = {
     "site_brand": "Saurabh Admin",
     "welcome_sign": "Welcome to Saurabh Admin",
     "copyright": "Saurabh Admin",
-    "search_model": ["auth.User", "portfolio.Project"],
+    "search_model": ["portfolio.Project"],
     "user_avatar": None,
     
     # Top Menu
@@ -245,7 +245,7 @@ JAZZMIN_SETTINGS = {
     },
     
     "order_with_respect_to": ["portfolio", "auth"],
-    "show_ui_builder": True,
+    "show_ui_builder": False,
     "custom_css": "css/jazzmin_custom.css",
 }
 

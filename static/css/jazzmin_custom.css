@@ -1,59 +1,312 @@
-/* ── JAZZMIN GLASSMORPHISM BACKGROUND ── */
+/* Saurabh Admin - Jazzmin Custom Dashboard Theme */
 
-body, .wrapper, .content-wrapper, .main-sidebar {
-    background: transparent !important;
+:root {
+    --sa-bg: #0f172a;
+    --sa-bg-soft: rgba(15, 23, 42, 0.78);
+    --sa-surface: rgba(17, 24, 39, 0.88);
+    --sa-surface-2: rgba(30, 41, 59, 0.74);
+    --sa-border: rgba(148, 163, 184, 0.16);
+    --sa-border-strong: rgba(148, 163, 184, 0.24);
+    --sa-text: #e5e7eb;
+    --sa-muted: #94a3b8;
+    --sa-accent: #7c83ff;
+    --sa-accent-2: #5eead4;
+    --sa-shadow: 0 18px 45px rgba(2, 6, 23, 0.32);
 }
 
 body {
-    background: linear-gradient(rgba(11, 10, 26, 0.6), rgba(11, 10, 26, 0.6)), 
-                url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1920&q=80') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-attachment: fixed !important;
+    background:
+        linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.78)),
+        url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1920&q=80') center/cover fixed !important;
+    color: var(--sa-text) !important;
 }
 
-/* Sidebar Glassmorphism */
-.main-sidebar, .brand-link {
-    background: rgba(20, 18, 45, 0.5) !important;
-    backdrop-filter: blur(15px) !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+body, .wrapper, .content-wrapper, .main-sidebar, .main-header {
+    background-color: transparent !important;
 }
 
-/* Content Area Glassmorphism */
+.wrapper {
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.main-sidebar {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.88)) !important;
+    border-right: 1px solid var(--sa-border) !important;
+    backdrop-filter: blur(18px) !important;
+    box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.03) !important;
+}
+
+.brand-link {
+    background: rgba(15, 23, 42, 0.98) !important;
+    border-bottom: 1px solid var(--sa-border) !important;
+    color: #f8fafc !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.3px !important;
+}
+
+.brand-link .brand-image {
+    border-radius: 10px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+}
+
+.sidebar {
+    padding-top: 0.5rem;
+}
+
+.sidebar .nav-link {
+    color: #cbd5e1 !important;
+    border-radius: 12px;
+    margin: 0.18rem 0.6rem;
+    padding: 0.72rem 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.sidebar .nav-link:hover {
+    background: rgba(124, 131, 255, 0.11) !important;
+    color: #ffffff !important;
+}
+
+.sidebar .nav-link.active,
+.sidebar .nav-link.active:hover {
+    background: linear-gradient(135deg, rgba(124, 131, 255, 0.18), rgba(94, 234, 212, 0.12)) !important;
+    color: #ffffff !important;
+    box-shadow: inset 0 0 0 1px rgba(124, 131, 255, 0.18);
+}
+
+.nav-sidebar .nav-header {
+    color: var(--sa-muted) !important;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    padding: 1rem 1rem 0.4rem;
+}
+
+/* Header */
+.main-header.navbar {
+    background: rgba(15, 23, 42, 0.72) !important;
+    backdrop-filter: blur(14px) !important;
+    border-bottom: 1px solid var(--sa-border) !important;
+    min-height: 68px;
+}
+
+.navbar-light .navbar-nav .nav-link,
+.navbar-dark .navbar-nav .nav-link {
+    color: #e2e8f0 !important;
+}
+
+.navbar .form-control,
+.navbar .input-group-text {
+    background: rgba(15, 23, 42, 0.9) !important;
+    color: #e2e8f0 !important;
+    border-color: var(--sa-border-strong) !important;
+}
+
+.navbar .form-control::placeholder {
+    color: #94a3b8 !important;
+}
+
+/* Content */
 .content-wrapper {
     background: transparent !important;
+    padding: 1.4rem 1.6rem 2rem;
 }
 
-.card {
-    background: rgba(255, 255, 255, 0.04) !important;
-    backdrop-filter: blur(10px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 15px !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+.content-header {
+    padding: 0.2rem 0 1rem;
+}
+
+.content-header h1,
+.content-header h1 small,
+.content-header h1 .text-muted {
+    color: #f8fafc !important;
+    font-weight: 700;
+}
+
+.breadcrumb {
+    background: rgba(15, 23, 42, 0.75) !important;
+    border: 1px solid var(--sa-border) !important;
+    border-radius: 12px;
+    padding: 0.7rem 1rem;
+    box-shadow: var(--sa-shadow);
+}
+
+.breadcrumb a,
+.breadcrumb-item,
+.breadcrumb-item.active {
+    color: #e2e8f0 !important;
+}
+
+/* Cards / modules */
+.card,
+.small-box,
+.callout,
+.info-box,
+.direct-chat,
+.timeline > div {
+    background: var(--sa-surface) !important;
+    color: var(--sa-text) !important;
+    border: 1px solid var(--sa-border) !important;
+    border-radius: 18px !important;
+    box-shadow: var(--sa-shadow) !important;
+    backdrop-filter: blur(12px) !important;
 }
 
 .card-header {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-    background: transparent !important;
+    background: rgba(30, 41, 59, 0.42) !important;
+    border-bottom: 1px solid var(--sa-border) !important;
+    color: #f8fafc !important;
+    font-weight: 700;
+    padding: 1rem 1.15rem;
 }
 
-/* Navbar Glassmorphism */
-.main-header {
-    background: rgba(11, 10, 26, 0.7) !important;
-    backdrop-filter: blur(10px) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+.card-body {
+    color: var(--sa-text) !important;
 }
 
-/* Table Backgrounds */
+.card-title {
+    color: #f8fafc !important;
+    font-weight: 700;
+}
+
+/* Admin app list/table */
+.change-list .card,
+.module,
+.app-auth,
+.app-portfolio {
+    border-radius: 18px !important;
+}
+
 .table {
-    background: transparent !important;
-    color: #e0e0e0 !important;
+    color: var(--sa-text) !important;
+    margin-bottom: 0 !important;
 }
 
 .table thead th {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-bottom: 1px solid var(--sa-border) !important;
+    color: #f8fafc !important;
+    background: rgba(30, 41, 59, 0.65) !important;
 }
 
-.table td, .table th {
-    border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+.table td,
+.table th {
+    border-top: 1px solid rgba(148, 163, 184, 0.08) !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background: rgba(255, 255, 255, 0.015) !important;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+}
+
+.btn-primary,
+.btn.btn-primary,
+.btn-success,
+.btn-info,
+.btn-warning,
+.btn-danger {
+    box-shadow: none !important;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--sa-accent), #5f67ff) !important;
+    border-color: transparent !important;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+    border-color: transparent !important;
+}
+
+.btn-info {
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9) !important;
+    border-color: transparent !important;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+    border-color: transparent !important;
+    color: #fff !important;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+    border-color: transparent !important;
+}
+
+/* Forms */
+.form-control,
+.custom-select,
+.select2-selection--single,
+.select2-container--default .select2-selection--single {
+    background: rgba(15, 23, 42, 0.82) !important;
+    color: var(--sa-text) !important;
+    border: 1px solid var(--sa-border-strong) !important;
+    border-radius: 12px !important;
+}
+
+.form-control:focus,
+.custom-select:focus,
+.select2-container--default .select2-selection--single:focus {
+    border-color: rgba(124, 131, 255, 0.72) !important;
+    box-shadow: 0 0 0 0.2rem rgba(124, 131, 255, 0.18) !important;
+}
+
+.input-group-text {
+    background: rgba(30, 41, 59, 0.82) !important;
+    border-color: var(--sa-border-strong) !important;
+    color: #e2e8f0 !important;
+}
+
+/* Sidebar icons and text polish */
+.nav-sidebar .nav-link > p,
+.nav-sidebar .nav-link i {
+    color: inherit !important;
+}
+
+/* Alerts / messages */
+.alert,
+.callout {
+    border-radius: 14px !important;
+}
+
+/* Admin dashboard empty state and recent actions */
+#content-main .module,
+.dashboard .module {
+    margin-bottom: 1.15rem;
+}
+
+.dashboard #content-main {
+    padding-right: 0.5rem;
+}
+
+.dashboard .module h2,
+.dashboard .module caption {
+    color: #f8fafc !important;
+    font-weight: 700;
+    padding: 0.1rem 0 0.85rem;
+}
+
+.dashboard .module table {
+    background: transparent !important;
+}
+
+.dashboard .module ul.actionlist li {
+    border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+    padding: 0.55rem 0;
+}
+
+/* Responsive cleanups */
+@media (max-width: 991.98px) {
+    .content-wrapper {
+        padding: 1rem;
+    }
+
+    .sidebar {
+        background: rgba(15, 23, 42, 0.98) !important;
+    }
 }
