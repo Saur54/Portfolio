@@ -12,6 +12,14 @@
     gap: 28px;
   }
 
+  #home .hero-image {
+    order: 1;
+  }
+
+  #home .hero-content {
+    order: 2;
+  }
+
   #home .hero-content {
     width: 100%;
     max-width: 100%;
