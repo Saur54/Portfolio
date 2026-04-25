@@ -5,7 +5,7 @@ services:
     region: singapore
     plan: free
     buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
-    preDeployCommand: python manage.py migrate
+    preDeployCommand: python manage.py migrate && python manage.py sync_media_to_cloudinary
     startCommand: gunicorn django_portfolio.wsgi:application
     envVars:
       - key: DJANGO_SECRET_KEY
