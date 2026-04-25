@@ -12,8 +12,12 @@ services:
         generateValue: true
       - key: DJANGO_DEBUG
         value: "False"
-      # Optional: set CLOUDINARY_URL or CLOUDINARY_CLOUD_NAME/API_KEY/API_SECRET
-      # in the Render dashboard to make admin uploads permanent.
+      - key: CLOUDINARY_CLOUD_NAME
+        value: "dsfao9ons"
+      - key: CLOUDINARY_API_KEY
+        value: "971937927247562"
+      - key: CLOUDINARY_API_SECRET
+        value: "O_8vumbpcAU22kAdb21-fuQu-mE"
       - key: DATABASE_URL
         fromDatabase:
           name: saurabh-postgres
