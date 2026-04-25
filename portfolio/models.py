@@ -1,5 +1,7 @@
 from django.db import models
 
+from .storage import get_image_storage, get_raw_storage
+
 class SocialLink(models.Model):
     icon = models.CharField(max_length=50, help_text='FontAwesome icon class (e.g., fa-brands fa-twitter)')
     url = models.URLField()
@@ -12,7 +14,7 @@ class HomeSection(models.Model):
     last_name = models.CharField(max_length=50)
     profession = models.CharField(max_length=100)
     description = models.TextField()
-    hero_image = models.ImageField(upload_to='hero_images/')
+    hero_image = models.ImageField(upload_to='hero_images/', storage=get_image_storage())
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -29,7 +31,7 @@ class AboutSection(models.Model):
     skype = models.CharField(max_length=50, default="steve.milner")
     languages = models.CharField(max_length=100, default="French, English")
     description = models.TextField(blank=True)
-    cv_file = models.FileField(upload_to='cv/', blank=True, null=True)
+    cv_file = models.FileField(upload_to='cv/', blank=True, null=True, storage=get_raw_storage())
 
     def __str__(self):
         return "About Info"
@@ -78,7 +80,7 @@ class Project(models.Model):
     category = models.CharField(max_length=50, choices=CATEGORIES, default='Web')
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True)
-    image = models.ImageField(upload_to='projects/')
+    image = models.ImageField(upload_to='projects/', storage=get_image_storage())
     tech_stack = models.CharField(max_length=200, help_text='Comma separated, e.g., HTML, CSS, JS', blank=True)
     is_featured = models.BooleanField(default=False)
     code_link = models.URLField(blank=True, null=True)
@@ -112,7 +114,7 @@ class QueryMessage(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
-    image = models.ImageField(upload_to='blogs/', blank=True, null=True)
+    image = models.ImageField(upload_to='blogs/', blank=True, null=True, storage=get_image_storage())
     description = models.TextField(help_text="Short description for the blog list")
     content = models.TextField(help_text="Full blog content (You can use HTML tags like <b>, <p>, <br> here)")
     date_posted = models.DateField(auto_now_add=True)

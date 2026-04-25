@@ -1,4 +1,5 @@
 import os
+from importlib.util import find_spec
 from urllib.parse import unquote, urlparse
 from pathlib import Path
 
@@ -23,6 +24,21 @@ if not SECRET_KEY:
         raise ValueError('DJANGO_SECRET_KEY environment variable must be set in production')
 
 ALLOWED_HOSTS = ['portfolio-c2tk.onrender.com', '127.0.0.1', 'localhost']
+
+CLOUDINARY_CLOUD_NAME = os.getenv('CLOUDINARY_CLOUD_NAME')
+CLOUDINARY_API_KEY = os.getenv('CLOUDINARY_API_KEY')
+CLOUDINARY_API_SECRET = os.getenv('CLOUDINARY_API_SECRET')
+CLOUDINARY_URL = os.getenv('CLOUDINARY_URL')
+
+CLOUDINARY_PACKAGES_AVAILABLE = (
+    find_spec('cloudinary') is not None and find_spec('cloudinary_storage') is not None
+)
+CLOUDINARY_CREDENTIALS_CONFIGURED = bool(
+    CLOUDINARY_URL or (
+        CLOUDINARY_CLOUD_NAME and CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET
+    )
+)
+CLOUDINARY_MEDIA_ENABLED = CLOUDINARY_PACKAGES_AVAILABLE and CLOUDINARY_CREDENTIALS_CONFIGURED
 
 
 def build_database_config() -> dict:
@@ -64,6 +80,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+if CLOUDINARY_PACKAGES_AVAILABLE:
+    INSTALLED_APPS += [
+        'cloudinary_storage',
+        'cloudinary',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -141,10 +163,29 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+if CLOUDINARY_MEDIA_ENABLED:
+    CLOUDINARY_STORAGE = {}
+    if not CLOUDINARY_URL:
+        CLOUDINARY_STORAGE = {
+            'CLOUD_NAME': CLOUDINARY_CLOUD_NAME,
+            'API_KEY': CLOUDINARY_API_KEY,
+            'API_SECRET': CLOUDINARY_API_SECRET,
+            'SECURE': True,
+            'PREFIX': MEDIA_URL,
+        }
+
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+    },
+}
 
 if not DEBUG:
     # Security settings for production
