@@ -22,7 +22,8 @@ venv/
 *.pyc
 db.sqlite3
 /staticfiles/
-media/
+# Media assets are versioned for this portfolio so Render can serve them.
+# If you later move to Cloudinary/S3, you can ignore this folder again.
 
 # IDEs and editors
 .vscode/
