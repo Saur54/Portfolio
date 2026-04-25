@@ -1,9 +1,10 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
+from django.db import transaction
 import os
 
 class Command(BaseCommand):
-    help = 'Create default superuser if it does not exist'
+    help = 'Create or update the default superuser'
 
     def handle(self, *args, **options):
         username = os.getenv('DJANGO_SUPERUSER_USERNAME', 'admin')
@@ -16,16 +17,24 @@ class Command(BaseCommand):
             )
             return
             
-        if not User.objects.filter(username=username).exists():
-            User.objects.create_superuser(
+        with transaction.atomic():
+            user, created = User.objects.get_or_create(
                 username=username,
-                email=email,
-                password=password
+                defaults={'email': email},
             )
-            self.stdout.write(
-                self.style.SUCCESS(f'Successfully created superuser: {username}')
-            )
-        else:
-            self.stdout.write(
-                self.style.WARNING('Superuser already exists')
-            )
+
+            user.email = email
+            user.is_staff = True
+            user.is_superuser = True
+            user.is_active = True
+            user.set_password(password)
+            user.save()
+
+            if created:
+                self.stdout.write(
+                    self.style.SUCCESS(f'Successfully created superuser: {username}')
+                )
+            else:
+                self.stdout.write(
+                    self.style.SUCCESS(f'Successfully updated superuser credentials: {username}')
+                )
