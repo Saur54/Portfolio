@@ -81,12 +81,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-if CLOUDINARY_PACKAGES_AVAILABLE:
-    INSTALLED_APPS += [
-        'cloudinary_storage',
-        'cloudinary',
-    ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
