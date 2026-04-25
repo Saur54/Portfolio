@@ -13,12 +13,18 @@ services:
         value: "False"
       - key: DJANGO_ALLOWED_HOSTS
         value: saurabh.onrender.com
+      - key: DJANGO_SUPERUSER_USERNAME
+        value: admin
+      - key: DJANGO_SUPERUSER_EMAIL
+        value: admin@saurabh.com
+      - key: DJANGO_SUPERUSER_PASSWORD
+        value: change-this-password-in-render
       - key: DATABASE_URL
         fromDatabase:
           name: saurabh-postgres
           property: connectionString
       - key: PYTHON_VERSION
-        value: "3.9.18"
+        value: "3.13.1"
 databases:
   - name: saurabh-postgres
     databaseName: saurabh_portfolio
