@@ -24,5 +24,7 @@ urlpatterns = [
     path('', include('portfolio.urls')),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve uploaded media files in both local development and Render deploys.
+# Render free web services have an ephemeral filesystem, so media uploads
+# should be treated as temporary unless you move them to persistent storage.
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
