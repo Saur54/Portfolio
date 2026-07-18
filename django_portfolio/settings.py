@@ -23,7 +23,7 @@ if not SECRET_KEY:
         # Production mode - SECRET_KEY is required
         raise ValueError('DJANGO_SECRET_KEY environment variable must be set in production')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'portfolio-mu-gules-ahexrwd6cc.vercel.app']
 
 CLOUDINARY_CLOUD_NAME = os.getenv('CLOUDINARY_CLOUD_NAME')
 CLOUDINARY_API_KEY = os.getenv('CLOUDINARY_API_KEY')
